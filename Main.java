@@ -1,10 +1,8 @@
 
-import com.sun.security.jgss.GSSUtil;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
 import java.io.*;
-public class Main{
+public class Lists {
     public static int bsf(int arr[],int target)
     {
         int ans=-1;
@@ -191,6 +189,44 @@ public class Main{
             merge(s,mid,e,arr);
         }
     }
+    public static boolean contains(int x,int[] arr)
+    {
+        int i,n=arr.length;
+        for(i=0;i<n;i++)
+        {
+            if(arr[i]==x)
+                return true;
+        }
+        return false;
+    }
+    public static int partition(int s,int e,int[] arr)
+    {
+        int pivot=arr[e];
+        int p=s;
+        int i;
+        for(i=s;i<e;i++)
+        {
+            if(arr[i]<pivot) {
+                int temp = arr[i];
+                arr[i] = arr[p];
+                arr[p] = temp;
+                p++;
+            }
+        }
+        int temp=arr[e];
+        arr[e]=arr[p];
+        arr[p]=temp;
+        return p;
+    }
+    public static void quickSort(int s,int e,int[] arr)
+    {
+        if(s<e)
+        {
+            int p=partition(s,e,arr);
+            quickSort(s,p-1,arr);
+            quickSort(p+1,e,arr);
+        }
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter the number of elements");
@@ -203,8 +239,8 @@ public class Main{
         for(i=0;i<n;i++)
             System.out.print(arr[i]+" ");
         System.out.println();
-        mergeSort(0,n-1,arr);
-        System.out.println("array before sorting");
+        quickSort(0,n-1,arr);
+        System.out.println("array after sorting");
         for(i=0;i<n;i++)
             System.out.print(arr[i]+" ");
         System.out.println();
